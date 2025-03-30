@@ -21,21 +21,8 @@ import SplineScene from "./spline";
 function App() {
   const [email, setEmail] = useState('');
   const [expandedFaq, setExpandedFaq] = useState<number | null>(null);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      setMousePosition({
-        x: (e.clientX - window.innerWidth / 2) / 50,
-        y: (e.clientY - window.innerHeight / 2) / 50
-      });
-    };
-
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
 
   const features = [
     {
@@ -181,16 +168,10 @@ function App() {
 
       {/* Hero Section */}
       <section className="relative w-full h-screen flex items-center justify-center text-center overflow-hidden">
-        {/* Spline Background with Parallax */}
-        <motion.div 
-          className="absolute inset-0"
-          style={{
-            x: mousePosition.x,
-            y: mousePosition.y
-          }}
-        >
+        {/* Spline Background */}
+        <div className="absolute inset-0">
           <SplineScene />
-        </motion.div>
+        </div>
 
         {/* Content */}
         <div className="relative z-10 max-w-3xl px-6">
